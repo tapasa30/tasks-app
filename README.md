@@ -33,7 +33,7 @@ Para detener el contenedor:
 
 ## Acceder a la APP
 
-Una vez que los contenedores estén en funcionamiento, podrás acceder a la APP desde este host: [http://localhost:4242](http://localhost:4242).
+Una vez que los contenedores estén en funcionamiento, podrás acceder a la APP desde este host: [http://localhost:4200](http://localhost:4200).
 
 Si importas la base de datos de prueba en la API, el usuario que hay creado es:
 
