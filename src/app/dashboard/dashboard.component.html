@@ -1,0 +1,83 @@
+<div class="row" xmlns="http://www.w3.org/1999/html">
+
+  <div class="col-12 mb-3">
+    <div class="d-grid">
+      <div class="card my-5">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-end mb-4">
+            <h3 class="mb-0"><b>Add new task</b></h3>
+          </div>
+
+          <form [formGroup]="createTaskForm" (ngSubmit)="onCreateTaskSubmit()">
+            <div class="form-group mb-3">
+              <label class="form-label" for="task-title">Task title</label>
+              <input type="text" class="form-control" id="task-title" formControlName="title" placeholder="Task title" />
+            </div>
+            <div class="form-group mb-3">
+              <label class="form-label" for="task-description">Task description</label>
+              <textarea class="form-control" id="task-description" formControlName="description"></textarea>
+            </div>
+            <div class="d-grid mt-4">
+              <button type="submit" class="btn btn-primary">Create task</button>
+            </div>
+          </form>
+
+
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+
+  <div class="col-6">
+    <h5 class="mb-3">To do Tasks</h5>
+    <div
+      cdkDropList
+      #todoList="cdkDropList"
+      [cdkDropListData]="this.todoTasks"
+      [cdkDropListConnectedTo]="[doneList]"
+      (cdkDropListDropped)="dropTaskCard($event)">
+      @for (todoTask of this.todoTasks; track todoTask) {
+        <div class="card" cdkDrag>
+          <div class="card-body">
+            <div class="row justify-content-between">
+              <div class="col-auto">
+                <h5>{{ todoTask.title }}</h5>
+                <p class="mb-3">{{ todoTask.description }}</p>
+                <button (click)="deleteTask(todoTask.id)" type="button" class="btn btn-danger">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+
+  </div>
+  <div class="col-6">
+    <h5 class="mb-3">Completed Tasks</h5>
+    <div
+      class="h-100"
+      cdkDropList
+      #doneList="cdkDropList"
+      [cdkDropListData]="this.completedTasks"
+      [cdkDropListConnectedTo]="[todoList]"
+      (cdkDropListDropped)="dropTaskCard($event)">
+      @for (completedTask of this.completedTasks; track completedTask) {
+        <div class="card" >
+          <div class="card-body">
+            <div class="row justify-content-between">
+              <div class="col-auto">
+                <h5>{{ completedTask.title }}</h5>
+                <p class="mb-3">{{ completedTask.description }}</p>
+                <button (click)="deleteTask(completedTask.id)" type="button" class="btn btn-danger">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+</div>

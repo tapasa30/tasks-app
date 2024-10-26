@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  node:
+    image: node:18-alpine
+    working_dir: /var/app
+    tty: true
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./:/var/app:delegated
+      - /etc/group:/etc/group:ro
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/shadow:/etc/shadow:ro
+      - /home/${USER}:/home/${USER}:delegated
